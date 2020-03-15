@@ -7,6 +7,7 @@ export class Population {
 		}
 		this.canvas = canvas;
 		this.ctx = this.canvas.getContext('2d');
+		this.ctx.clearRect(0, 0, canvas.width, canvas.height);
 
 		// Range: 1 - 5000.
 		this.size = options.size || 2000;
