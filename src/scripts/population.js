@@ -9,10 +9,10 @@ class Population {
 		this.ctx = this.canvas.getContext('2d');
 
 		// Range: 1 - 5000.
-		this.size = options.size || 450;
+		this.size = options.size || 10;
 
 		// Range: 0.0 - 1.0
-		this.density = options.density || 0.5;
+		this.density = options.density || 1.0;
 
 		// Calculate basic parameters.
 		this.onResize();
@@ -38,14 +38,14 @@ class Population {
 		// A density of 1.0 means that there is by average a distance of 6
 		// radiuses horizontally and vertically between each person.  A
 		// density of 0.0 corresponds to a radius of half a pixel.
-		const maxGrid = Math.sqrt((w * h) / this.size) / 3; // density 1.0
-		const minGrid = 1.0;
+		const maxGrid = Math.sqrt((w * h) / this.size) / 2; // density 1.0
+		const minGrid = 10.0;
 		this.grid = minGrid + this.density * (maxGrid - minGrid);
 
-		if (this.grid < 1) {
+		if (this.grid < minGrid) {
 			// We do not bother to update the density form value.
 			this.grid = 1.0;
-			this.size = Math.floor((w * h) >> 2);
+			this.size = 2 * 2;
 		}
 	}
 };
