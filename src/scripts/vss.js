@@ -1,5 +1,5 @@
 const $ = require('jquery');
-const Population = require('./population');
+import { Population } from './population';
 
 $(function () {
 	const canvas = document.querySelector('#vss');

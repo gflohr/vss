@@ -1,6 +1,6 @@
-const Person = require('./person');
+import { Person } from './person';
 
-class Population {
+export class Population {
 	constructor(canvas, options) {
 		if (typeof options === 'undefined') {
 			options = {};
@@ -49,5 +49,3 @@ class Population {
 		}
 	}
 };
-
-module.exports = Population;

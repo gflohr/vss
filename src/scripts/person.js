@@ -1,4 +1,4 @@
-class Person {
+export class Person {
 	constructor(ctx, x, y, r) {
 		this.ctx = ctx;
 		this.x = x;
@@ -11,13 +11,16 @@ class Person {
 	}
 
 	draw() {
-		this.ctx.beginPath();
-		this.ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2, false);
-		this.ctx.lineWidth = 1;
-		this.ctx.strokeStyle = this.color;
-		this.ctx.stroke();
-		this.ctx.fillStyle = this.color;
-		//this.ctx.fill();
+		const ctx = this.ctx;
+
+		ctx.beginPath();
+		ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2, false);
+		ctx.fillStyle = this.color;
+		ctx.fill();
+
+		ctx.lineWidth = 1;
+		ctx.strokeStyle = this.color;
+		ctx.stroke();
 	}
 
 	update() {
@@ -28,5 +31,3 @@ class Person {
 		return '#2222ff';
 	}
 }
-
-module.exports = Person;

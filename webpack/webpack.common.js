@@ -35,8 +35,13 @@ module.exports = {
     rules: [
       {
         test: /\.mjs$/,
-        include: /node_modules/,
-        type: 'javascript/auto'
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env'],
+          }
+        }
       },
       {
         test: /\.(ico|jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2)(\?.*)?$/,
