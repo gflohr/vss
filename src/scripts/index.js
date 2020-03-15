@@ -1,2 +1,3 @@
+import '../styles/bootstrap.scss';
 import '../styles/index.scss';
-import './canvas.js';
+import './vss.js';
