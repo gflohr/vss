@@ -9,7 +9,7 @@ export class Population {
 		this.ctx = this.canvas.getContext('2d');
 
 		// Range: 1 - 5000.
-		this.size = options.size || 1400;
+		this.size = options.size || 2000;
 
 		// Range: 0.0 - 1.0
 		this.density = options.density || 0.5;
@@ -61,7 +61,7 @@ export class Population {
 		// radiuses horizontally and vertically between each person.  A
 		// density of 0.0 corresponds to a radius of half a pixel.
 		const maxGrid = Math.sqrt((w * h) / this.size) / 2; // density 1.0
-		const minGrid = 10.0;
+		const minGrid = 1.0;
 		this.grid = minGrid + this.density * (maxGrid - minGrid);
 
 		if (this.grid < minGrid) {
