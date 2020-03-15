@@ -9,10 +9,10 @@ export class Population {
 		this.ctx = this.canvas.getContext('2d');
 
 		// Range: 1 - 5000.
-		this.size = options.size || 10;
+		this.size = options.size || 1400;
 
 		// Range: 0.0 - 1.0
-		this.density = options.density || 1.0;
+		this.density = options.density || 0.5;
 
 		// Calculate basic parameters.
 		this.onResize();
@@ -25,9 +25,31 @@ export class Population {
 		while (this.persons.length < this.size) {
 			const x = r + Math.random() * w;
 			const y = r + Math.random() * h;
-			const p = new Person(this.ctx, x, y, r);
+			const p = new Person(x, y, r);
+			if (this.collision(p)) {
+				continue;
+			}
 			this.persons.push(p);
+			this.drawPerson(p);
 		}
+	}
+
+	drawPerson(p) {
+		const ctx = this.ctx;
+		const color = this.personColor(p);
+
+		ctx.beginPath();
+		ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2, false);
+		ctx.fillStyle = color;
+		ctx.fill();
+
+		ctx.lineWidth = 1;
+		ctx.strokeStyle = color;
+		ctx.stroke();
+	}
+
+	personColor(p) {
+		return 'rgb(128, 147, 232)';
 	}
 
 	onResize() {
@@ -44,8 +66,26 @@ export class Population {
 
 		if (this.grid < minGrid) {
 			// We do not bother to update the density form value.
-			this.grid = 1.0;
-			this.size = 2 * 2;
+			this.grid = minGrid;
+			this.size = Math.floor((w * h) / (4 * minGrid * minGrid));
 		}
+	}
+
+	collision(person) {
+		for (let i = 0; i < this.persons.length; ++i) {
+			const other = this.persons[i];
+
+			if (person === other) {
+				continue;
+			}
+
+			if (!person.collision(other)) {
+				continue;
+			}
+
+			return true;
+		}
+
+		return false;
 	}
 };
